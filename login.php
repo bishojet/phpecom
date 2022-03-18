@@ -11,7 +11,6 @@ if(isset($_SESSION['auth']))
 }
 
 
-
 include_once 'inc/header.php'; 
 include_once 'inc/navbar.php'; 
 
@@ -34,31 +33,22 @@ include_once 'inc/navbar.php';
 
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Registration Form</h3>
+                    <h3>Login Form</h3>
                 </div>
                 <div class="card-body">
                     <form action="functions/authcode.php" method="POST">
-                        <div class="mb-3">
-                            <label class="form-label">Name</label>
-                            <input type="text" name="name" class="form-control">
-                        </div>
+                        
                         <div class="mb-3">
                             <label class="form-label">Email address</label>
                             <input type="email" name="email" class="form-control">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Phone</label>
-                            <input type="text" name="phone" class="form-control">
-                        </div>
+                        
                         <div class="mb-3">
                             <label class="form-label">Password</label>
                             <input type="password" name="password" class="form-control">
                         </div>
-                        <div class="mb-3">
-                            <label class="form-label">Confirm Password</label>
-                            <input type="password" name="cpassword" class="form-control">
-                        </div>
-                        <button type="submit" name="register" class="btn btn-primary">Register</button>
+                        
+                        <button type="submit" name="login" class="btn btn-primary">Login</button>
                     </form>
                 </div>
             </div>

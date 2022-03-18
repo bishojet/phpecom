@@ -49,3 +49,36 @@ if(isset($_POST['register']))
     }
 
 }
+
+
+else if(isset($_POST['login']))
+{
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+    $login_query = "SELECT * FROM users WHERE email = '$email' AND password = '$password' ";
+    $result = mysqli_query($conn, $login_query);
+
+    if($result)
+    {
+        $_SESSION['auth'] = true;
+
+        $user_data = mysqli_fetch_array($result);
+        $username = $user_data['name'];
+        $useremail = $user_data['email'];
+
+        $_SESSION['auth_user'] = [
+            'name' => $username,
+            'name' => $useremail
+        ];
+
+        $_SESSION['message'] = "Logged in Successfully...!";
+        header('location: ../index.php');
+
+    }
+    else
+    {
+        $_SESSION['message'] = "Invalid Username & Password...!";
+        header('location: ../login.php');
+    }
+}
