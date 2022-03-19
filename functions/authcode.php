@@ -1,6 +1,8 @@
 <?php
 
 include_once '../config/dbcon.php'; 
+include_once 'myFunctions.php';
+
 
 session_start();
 
@@ -18,8 +20,7 @@ if(isset($_POST['register']))
     $check_email_result = mysqli_query($conn, $check_email);
     if(mysqli_num_rows($check_email_result) > 0)
     {
-        $_SESSION['message'] = "Email already Registared...!";
-        header('location: ../register.php');
+        redirect("../register.php", "Email already Registared...!");
     }
     else
     {
@@ -31,19 +32,16 @@ if(isset($_POST['register']))
 
             if($result)
             {
-                $_SESSION['message'] = "Registration Successfull...!";
-                header('location: ../login.php');
+                redirect("../login.php", "Registration Successfull...!");
             }
             else
             {
-                $_SESSION['message'] = "Something went Wrong...!";
-                header('location: ../register.php');
+                redirect("../register.php", "Something went Wrong...!");
             }
         }
         else
         {
-            $_SESSION['message'] = "Password do not match!";
-            header('location: ../register.php');
+            redirect("../register.php", "Password do not match!");            
         }
 
     }
@@ -66,19 +64,27 @@ else if(isset($_POST['login']))
         $user_data = mysqli_fetch_array($result);
         $username = $user_data['name'];
         $useremail = $user_data['email'];
-
+        $role_as = $user_data['role_as'];
+        
         $_SESSION['auth_user'] = [
             'name' => $username,
             'name' => $useremail
         ];
 
-        $_SESSION['message'] = "Logged in Successfully...!";
-        header('location: ../index.php');
+        $_SESSION['role_as'] = $role_as;
+
+        if($role_as == 1)
+        {
+            redirect("../admin/index.php", "Welcome to Dashboard...!");
+        }
+        else
+        {
+            redirect("../index.php", "Logged in Successfully...!");
+        }
 
     }
     else
     {
-        $_SESSION['message'] = "Invalid Username & Password...!";
-        header('location: ../login.php');
+        redirect("../login.php", "Invalid Username & Password...!");
     }
 }

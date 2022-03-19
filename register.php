@@ -1,12 +1,13 @@
 <?php 
 
+include_once 'functions/myFunctions.php';
+
 session_start();
 
 
 if(isset($_SESSION['auth'])) 
 {
-    $_SESSION['message'] = "You are already Logged in!";
-    header('location: index.php');
+    redirect("index.php", "You are already Logged in!");
     exit();
 }
 

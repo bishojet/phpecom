@@ -1,4 +1,9 @@
-<?php include 'inc/header.php'; ?>
+<?php 
+
+include 'inc/header.php'; 
+include_once '../middleware/adminMiddleware.php'; 
+
+?>
 
 
 <div class="container">
